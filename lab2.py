@@ -59,7 +59,7 @@ def calculate_area():
         print("Circle Area:", area)
         
     else:
-        print("Unknown shape")
+        print("unknown shape")
 
 calculate_area()
 
