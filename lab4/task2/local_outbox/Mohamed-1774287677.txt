@@ -1,0 +1,7 @@
+From: samy@iti.com
+To: manager@mail.com
+Subject: Lab 4 Submission
+
+Hi, Mohamed
+This is an email template
+Thanks
