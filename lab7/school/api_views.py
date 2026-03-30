@@ -45,8 +45,8 @@ def login(request):
 
     user = authenticate(request, username=username, password=password)
     if user is not None:
-        Token.objects.filter(user=user).delete()
-        token = Token.objects.create(user=user)
+        Token.objects.filter(user=user).delete() # delete old token
+        token = Token.objects.create(user=user) #create new token
         return Response(
             {"msg": "Login successful.", "token": token.key, "user": UserSerializer(user).data},
             status=200,
@@ -126,7 +126,7 @@ def create_grade(request):
     return Response({"error": "Invalid data.", "details": serializer.errors}, status=400)
 
 
-class SubjectCBV(APIView):
+class SubjectCBV(APIView): #inherit from apiview
     authentication_classes = [TokenAuthentication, SessionAuthentication]
     permission_classes = [IsAuthenticated]
 

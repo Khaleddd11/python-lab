@@ -7,6 +7,11 @@
     {% for student in students %}
         <li>
             {{ student.name }} - {{ student.email }} - Age: {{ student.age }}
+            <br>
+            {% if student.image %}
+                <img src="{{ student.image.url }}" alt="Student image" width="100">
+                <br>
+            {% endif %}
             <a href="{% url 'student_update' student.pk %}">Edit</a>
             <a href="{% url 'student_delete' student.pk %}">Delete</a>
         </li>
