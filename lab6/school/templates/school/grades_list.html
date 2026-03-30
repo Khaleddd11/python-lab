@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Grades</h2>
+<a href="{% url 'grade_create' %}">Create Grade</a>
+
+<form method="get">
+    <input type="text" name="search" value="{{ search_query }}" placeholder="Search by student name">
+    <button type="submit">Search</button>
+</form>
+
+<ul>
+    {% for grade in grades %}
+        <li>
+            {{ grade.student.name }} - {{ grade.subject.name }}: {{ grade.score }}
+            <a href="{% url 'grade_update' grade.pk %}">Edit</a>
+            <a href="{% url 'grade_delete' grade.pk %}">Delete</a>
+        </li>
+    {% empty %}
+        <li>No grades yet.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

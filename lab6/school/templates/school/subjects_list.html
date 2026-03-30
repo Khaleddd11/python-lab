@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Subjects</h2>
+<a href="{% url 'subject_create' %}">Create Subject</a>
+
+<form method="get">
+    <input type="text" name="search" value="{{ search_query }}" placeholder="Search by name or code">
+    <button type="submit">Search</button>
+</form>
+
+<ul>
+    {% for subject in subjects %}
+        <li>
+            {{ subject.name }} ({{ subject.code }})
+            <a href="{% url 'subject_update' subject.pk %}">Edit</a>
+            <a href="{% url 'subject_delete' subject.pk %}">Delete</a>
+        </li>
+    {% empty %}
+        <li>No subjects yet.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

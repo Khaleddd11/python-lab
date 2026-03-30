@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>School System - Students</title>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'home' %}">Home</a> | 
+        <a href="{% url 'students' %}">Students</a> | 
+        <a href="{% url 'contact_us' %}">Contact Us</a>
+    </nav>
+    <hr>
+
+    {% if msg %}
+        <h3 style="color: green;">{{ msg }}</h3>
+    {% endif %}
+
+    <h2>Create a Student</h2>
+    <form method="POST" action="{% url 'students' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Student Name" required><br><br>
+        <input type="number" name="age" placeholder="Age" required><br><br>
+        <input type="email" name="email" placeholder="Email Address" required><br><br>
+        <label>Profile Image:</label>
+        <input type="file" name="image"><br><br>
+        <button type="submit">Create Student</button>
+    </form>
+
+    <hr>
+
+    <h2>All Students</h2>
+    <ul>
+        {% for student in students %}
+            <li style="margin-bottom: 15px;">
+                <strong>{{ student.name }}</strong> (Age: {{ student.age }} | Email: {{ student.email }})
+                
+                <br>
+                {% if student.image %}
+                    <img src="{{ student.image.url }}" alt="Profile Image" width="100" style="margin-top: 5px;">
+                    <br>
+                {% endif %}
+                
+                <a href="{% url 'student_delete' student.id %}">
+                    <button style="color: red; margin-top: 5px;">Delete</button>
+                </a>
+            </li>
+        {% empty %}
+            <p>No students found. Add one using the form above!</p>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>

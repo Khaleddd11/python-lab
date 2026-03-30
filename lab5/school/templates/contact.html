@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>School System - Contact</title>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'home' %}">Home</a> | 
+        <a href="{% url 'students' %}">Students</a> | 
+        <a href="{% url 'contact_us' %}">Contact Us</a>
+    </nav>
+    <hr>
+
+    {% if msg %}
+        <h3 style="color: green;">{{ msg }}</h3>
+    {% endif %}
+
+    <h2>Contact Us</h2>
+    <form method="POST" action="{% url 'contact_us' %}">
+        {% csrf_token %}
+        <input type="email" name="email" placeholder="Your Email" required><br><br>
+        <textarea name="message" placeholder="Your Feedback" rows="5" cols="30" required></textarea><br><br>
+        <button type="submit">Submit Feedback</button>
+    </form>
+
+</body>
+</html>
